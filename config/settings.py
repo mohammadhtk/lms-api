@@ -54,7 +54,6 @@ INSTALLED_APPS = [
 
     # my apps
     "users.apps.UsersConfig",
-    "core.apps.CoreConfig",
     "courses.apps.CoursesConfig",
     "enrollments.apps.EnrollmentsConfig",
     "assessments.apps.AssessmentsConfig",
@@ -96,11 +95,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(
+        'DATABASE_URL',
+        default='postgres://postgres:123456@localhost:5432/lms_db'
+    )
 }
 
 
