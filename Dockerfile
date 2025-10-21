@@ -1,5 +1,5 @@
 # Use the official Python runtime image
-FROM python:3.12
+FROM python:3.11-slim
  
 # Create the app directory
 RUN mkdir /lms-api
