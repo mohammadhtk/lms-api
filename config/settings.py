@@ -49,8 +49,10 @@ INSTALLED_APPS = [
 
     # third party app
     'rest_framework',
+    "celery",
     "corsheaders",
     "drf_spectacular",
+    "phonenumber_field",
 
     # my apps
     "users.apps.UsersConfig",
@@ -90,6 +92,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # Database
@@ -162,7 +165,7 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "v.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -171,5 +174,5 @@ SIMPLE_JWT = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://localhost:6379/1')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='redis://localhost:6379/2')
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://redis:6379/1')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='redis://redis:6379/2')
